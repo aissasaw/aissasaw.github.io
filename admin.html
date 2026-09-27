@@ -1,2 +1,21 @@
-
-<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ادارة الصور</title><style>body{font-family:sans-serif;background:#111;color:#fff;text-align:center;padding:20px}.box{border:2px dashed #ffcc00;padding:30px;margin:20px auto;max-width:400px;border-radius:10px}button{background:#ffcc00;border:0;padding:10px 20px;font-weight:bold;margin-top:10px}</style></head><body><h1>🔥 رفع صورك</h1><div class="box"><input type="file" id="file" accept="image/*"><br><button onclick="upload()">ارفع الصورة</button><p id="res"></p></div><script>async function upload(){let f=document.getElementById('file').files[0];if(!f)return alert('اختار صورة');let fd=new FormData();fd.append('reqtype','fileupload');fd.append('fileToUpload',f);document.getElementById('res').innerText='جاري الرفع...';let r=await fetch('https://catbox.moe/user/api.php',{method:'POST',body:fd});let url=await r.text();document.getElementById('res').innerHTML='تم ✅<br><input style="width:95%;color:#000" value="'+url+'" readonly><br><br>انسخ الرابط';}</script><br><a href="index.html" style="color:#ffcc00">رجوع للموقع</a></body></html>
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>رفع الصور</title></head>
+<body style="text-align:center;padding:30px;font-family:sans-serif">
+<h1>ارفع صورتك</h1>
+<input type="file" id="f"><br><br>
+<button onclick="u()">رفع</button>
+<p id="r"></p>
+<script>
+async function u(){
+let file=document.getElementById('f').files[0];
+let d=new FormData();
+d.append('reqtype','fileupload');
+d.append('fileToUpload',file);
+document.getElementById('r').innerText='جاري الرفع...';
+let res=await fetch('https://catbox.moe/user/api.php',{method:'POST',body:d});
+let url=await res.text();
+document.getElementById('r').innerHTML='رابطك:<br><b>'+url+'</b><br><br><input value="'+url+'" style="width:90%">';}
+</script>
+</body>
+</html>
