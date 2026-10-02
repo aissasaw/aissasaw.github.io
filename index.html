@@ -4,41 +4,56 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="pqTV6C2E7jFp5RP5EPwnQEWKtBXxygl9SJChlYRQdm4" />
-<title>AISSA SAW | FLAMEN</title>
+<title>AISSA SAW - FLAMEN OFFICIAL</title>
 <style>
-body{margin:0;background:#0a0a0a;color:#fff;font-family:Arial;text-align:center}
-header{padding:40px 20px;background:#000}
-header img{width:180px;height:180px;border-radius:50%;border:4px solid #ffcc33;object-fit:cover}
-header h1{font-size:45px;margin:15px 0 0;letter-spacing:2px}
-header p{color:#ffcc33;font-size:18px}
-.videos{padding:20px 15px;max-width:700px;margin:auto}
-.video-box{background:#161616;border-radius:15px;padding:15px;margin-bottom:20px}
-.video-box iframe{width:100%;height:215px;border:0;border-radius:10px}
-.links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:20px}
-.links a{background:#ffcc33;color:#000;padding:12px 22px;border-radius:25px;text-decoration:none;font-weight:bold}
-footer{padding:30px;color:#555}
+body{margin:0;background:#000;color:#fff;font-family:Arial;overflow-x:hidden}
+.hero{position:relative;width:100%;height:100vh;background:url('flamen.jpg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:space-between}
+.hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.8))}
+.top-text{position:relative;z-index:2;padding:20px;text-align:center}
+.top-text h2{font-size:28px;margin:0}
+.top-text span{font-size:55px;color:#ffcc33;font-weight:bold;display:block;margin-top:20px;text-shadow:0 0 20px #000}
+.hero-bottom{position:relative;z-index:2;padding:20px;background:linear-gradient(transparent,#000)}
+.hero-bottom h3{margin:0;font-size:18px}
+.hero-bottom h3 span{color:#ffcc33}
+.btns{margin-top:15px;display:flex;gap:10px}
+.btns a{padding:10px 22px;border-radius:25px;text-decoration:none;font-weight:bold;font-size:14px}
+.btn-yellow{background:#ffcc33;color:#000}
+.btn-black{background:#111;color:#fff;border:1px solid #333}
+.video-section{padding:20px;background:#000}
+.video-box{border-radius:15px;overflow:hidden}
+.video-box iframe{width:100%;height:220px;border:0}
+.small-top{position:absolute;top:10px;left:10px;z-index:3;font-size:10px;letter-spacing:2px;color:#ffcc33}
+.badge{position:absolute;top:10px;right:10px;z-index:3;background:#ffcc33;color:#000;font-size:10px;padding:5px 10px;border-radius:15px}
 </style>
 </head>
 <body>
 
-<header>
-<img src="aissa.jpg" alt="Aissa Saw">
-<h1>AISSA SAW</h1>
-<p>FLAMEN - الموقع الرسمي</p>
-</header>
+<div class="hero">
+<div class="small-top">AISSA SAW</div>
+<div class="badge">Ecoutez maintenant</div>
 
-<div class="videos">
+<div class="top-text">
+<h2>اليوم فتحنا الموقع الجديد</h2>
+<span>بفضل الله</span>
+</div>
+
+<div class="hero-bottom">
+<h3>aissasaw.github.io - <span>FLAMEN OUT NOW</span></h3>
+<p style="font-size:11px;color:#ffcc33;margin:5px 0">NOUVELLE CHANSON • DISPONIBLE</p>
+<p style="font-size:24px;font-weight:bold;margin:0">Disponible<br>dès maintenant<br>Flamen •</p>
+<p style="font-size:10px;color:#888">AISSA SAW - FLAMEN OUT NOW</p>
+<div class="btns">
+<a class="btn-yellow" href="https://youtu.be/ja_aSZHIkN0">► ÉCOUTER</a>
+<a class="btn-black" href="https://youtu.be/ja_aSZHIkN0">VOIR CLIP</a>
+</div>
+</div>
+</div>
+
+<div class="video-section">
 <div class="video-box">
 <iframe src="https://www.youtube.com/embed/ja_aSZHIkN0" allowfullscreen></iframe>
 </div>
 </div>
 
-<div class="links">
-<a href="https://youtu.be/ja_aSZHIkN0">YouTube</a>
-<a href="#">Instagram</a>
-<a href="#">TikTok</a>
-</div>
-
-<footer>© 2026 AISSA SAW</footer>
 </body>
 </html>
