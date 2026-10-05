@@ -1,63 +1,284 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>أمثال جزائرية - AISSA SAW</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}
-h1{color:#ffcc33;margin:20px 0}
-.btn{background:#ffcc33;color:#000;padding:12px 25px;border:none;border-radius:8px;font-size:18px;font-weight:bold;cursor:pointer}
-.card{background:#111;border:1px solid #333;padding:15px;margin:15px 0;border-radius:10px;text-align:right}
-input{width:95%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #333;background:#222;color:#fff}
-.qanoun{color:red;font-weight:bold;border:2px solid red;padding:12px;background:#ffe6e6;border-radius:8px;margin-top:20px;color:#b00}
-a{color:#ffcc33;text-decoration:none}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمثال جزائرية - AISSA SAW</title>
+    <!-- استدعاء خط القاهرة لجمالية النص العربي -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #ffcc33;
+            --primary-hover: #e6b82c;
+            --bg-main: #0a0a0a;
+            --bg-card: #161616;
+            --border-color: #2a2a2a;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+            --accent-alert: #ff4d4d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Cairo', Tahoma, Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 15px;
+            transition: transform 0.2s;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            transform: translateX(5px);
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* الأزرار الاحترافية */
+        .btn {
+            background-color: var(--primary);
+            color: #000;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(255, 204, 51, 0.1);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* قسم النموذج */
+        .form-section {
+            display: none;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            text-align: right;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: #222;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-note {
+            margin-top: 12px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* قسم القوانين والإرشادات */
+        .info-box {
+            background-color: rgba(255, 204, 51, 0.05);
+            border-right: 4px solid var(--primary);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px 12px 12px 4px;
+            text-align: right;
+        }
+
+        .law-box {
+            background-color: rgba(255, 77, 77, 0.08);
+            border: 1px solid var(--accent-alert);
+            color: #ff8080;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* عرض الأمثال (كروت) */
+        .proverbs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .proverb-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: right;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .proverb-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 204, 51, 0.3);
+        }
+
+        .proverb-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .proverb-card p {
+            color: var(--text-main);
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+        }
+
+        .proverb-card small {
+            display: inline-block;
+            color: var(--text-muted);
+            background: #222;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body>
 
-<a href="index.html">← الرجوع للرئيسية</a>
-<h1>📚 أمثال جزائرية بالدارجة</h1>
+    <div class="container">
+        
+        <header>
+            <a href="index.html" class="back-link">← الرجوع للرئيسية</a>
+            <h1>📚 أمثال جزائرية بالدارجة</h1>
+            <button class="btn" id="toggleFormBtn" onclick="toggleForm()">➕ زيد مثل من عندك</button>
+        </header>
 
-<button class="btn" onclick="document.getElementById('form').style.display='block'">➕ زيد مثل من عندك</button>
+        <main>
+            <!-- قسم إضافة مثل جديد -->
+            <section class="form-section" id="formSection">
+                <form id="proverbForm" onsubmit="event.preventDefault(); sendMatal();">
+                    <div class="form-group">
+                        <input id="m1" type="text" placeholder="اكتب المثل بالدارجة - مثلاً: ولد الويدان ما يطيحش" required>
+                    </div>
+                    <div class="form-group">
+                        <input id="m2" type="text" placeholder="واش معناه؟" required>
+                    </div>
+                    <div class="form-group">
+                        <input id="m3" type="text" placeholder="اسمك الكريم">
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">ابعث المثل ✅</button>
+                    <p class="form-note">المثل ماراحش يبان ضرك حتى نراجعوه ونوافقو عليه.</p>
+                </form>
+            </section>
 
-<div id="form" style="display:none;margin-top:20px;background:#111;padding:15px;border-radius:10px">
-<input id="m1" placeholder="اكتب المثل بالدارجة - مثلا: ولد الويدان ما يطيحش">
-<input id="m2" placeholder="واش معناه؟">
-<input id="m3" placeholder="اسمك">
-<br><br>
-<button class="btn" onclick="sendMatal()">ابعث المثل ✅</button>
-<p style="margin-top:10px;font-size:14px;color:#aaa">المثل ما يبانش ضرك حتى ندرسو احنا</p>
-</div>
+            <!-- قسم التوجيهات والقوانين -->
+            <section class="info-box">
+                <p>➕ لإضافة أمثلة جديدة اضغط على زر <strong style="color: var(--primary);">"زيد مثل من عندك"</strong> في الأعلى.</p>
+                <div class="law-box">
+                    ⚠️ القانون: قبل أن يُعرض المثل في الموقع، يجب علينا دراسته والموافقة عليه أولاً.
+                </div>
+            </section>
 
-<div style="margin-top:20px">
-<p>➕ لإضافة أمثلة جديدة اضغط على زر <strong style="color:#ffcc33">"زيد مثل من عندك"</strong> الفوق</p>
-<div class="qanoun">⚠️ القانون: قبل أن يعرض المثل في الموقع يجب علينا دراسة هذا المثل والموافقة عليه.</div>
-</div>
+            <!-- قسم عرض الأمثال الحالية -->
+            <section class="proverbs-grid">
+                
+                <article class="proverb-card">
+                    <h3>🗣️ "ولد الويدان ما يطيحش"</h3>
+                    <p>📖 معناه: ولد الأصل ما يطيحش مهما جار عليه الزمان.</p>
+                    <small>📍 الويدان - المسيلة</small>
+                </article>
 
-<div style="margin-top:30px">
-<div class="card">
-<h3>🗣️ "ولد الويدان ما يطيحش"</h3>
-<p>📖 معناه: ولد الأصل ما يطيحش مهما صار عليه الوقت</p>
-<small>📍 الويدان - مسيلة</small>
-</div>
-<div class="card">
-<h3>🗣️ "النية الصافية ترزق"</h3>
-<p>📖 معناه: كي تكون نيتك مليحة ربي يفتح عليك</p>
-<small>📍 أمثال جزائرية</small>
-</div>
-</div>
+                <article class="proverb-card">
+                    <h3>🗣️ "النية الصافية ترزق"</h3>
+                    <p>📖 معناه: كي تكون نيتك مليحة وصافية ربي يفتح عليك الرزق.</p>
+                    <small>📍 أمثال جزائرية</small>
+                </article>
 
-<script>
-function sendMatal(){
-let m=document.getElementById('m1').value;
-if(m==""){alert("اكتب المثل أولا!");return}
-alert("شكرا! مثلك '"+m+"' راح للدراسة ✅ كي نقبلو يبان في الموقع");
-document.getElementById('form').style.display='none';
-document.getElementById('m1').value="";
-}
-</script>
+            </section>
+        </main>
+        
+    </div>
+
+    <script>
+        // دالة إظهار وإخفاء الفورم بسلاسة
+        function toggleForm() {
+            const form = document.getElementById('formSection');
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+            } else {
+                form.style.display = 'block';
+                document.getElementById('m1').focus(); // وضع المؤشر في الخانة الأولى مباشرة
+            }
+        }
+
+        // دالة إرسال المثل والتحقق
+        function sendMatal() {
+            const matal = document.getElementById('m1').value.trim();
+            const meaning = document.getElementById('m2').value.trim();
+            
+            if (matal === "" || meaning === "") {
+                alert("من فضلك املأ الخانات الأساسية أولاً!");
+                return;
+            }
+
+            // تنبيه احترافي للمستخدم
+            alert(`شكراً لك! مثلك: "${matal}" أرسل بنجاح للدراسة والمراجعة الحثيثة. ✅`);
+            
+            // إعادة تهيئة الاستمارة وإخفائها
+            document.getElementById('proverbForm').reset();
+            document.getElementById('formSection').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
