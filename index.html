@@ -1,50 +1,178 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="google-site-verification" content="pqTV6C2E7jFp5RP5EPwnQEWKtBXxygl9SJChlYRQdm4" />
-<title>AISSA SAW RAP - FLAMEN</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}
-.hero{width:100%;min-height:100vh;background:#000 url('hero.jpg') center top/cover no-repeat;position:relative;display:flex;flex-direction:column;justify-content:space-between}
-.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.15) 0%,rgba(0,0,0,.1) 40%,rgba(0,0,0,.85) 100%)}
-.nav{position:relative;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
-.logo{font-size:28px;font-weight:900;letter-spacing:.5px}
-.logo span{color:#ffcc33}
-.btn-top{background:#ffcc33;color:#000;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:900;font-size:14px}
-.content{position:relative;z-index:5;padding:25px 20px 30px}
-.small{color:#ffcc33;font-size:12px;letter-spacing:3px;border-left:3px solid #ffcc33;padding-left:10px;margin-bottom:12px}
-.big{font-size:42px;font-weight:900;line-height:1.1}
-.big span{color:#ffcc33}
-.desc{color:#aaa;font-size:14px;margin-top:12px;line-height:1.4;max-width:320px}
-.btns{display:flex;gap:12px;margin-top:20px}
-.b{padding:13px 28px;border-radius:8px;text-decoration:none;font-weight:900;font-size:14px}
-.y{background:#ffcc33;color:#000}
-.o{background:transparent;color:#fff;border:2px solid #fff}
-.footer{position:relative;z-index:5;display:flex;justify-content:space-between;padding:15px 20px;font-size:10px;color:#666;border-top:1px solid #222}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="pqTV6C2E7jFp5RP5EPwnQEWKtBXxygl9SJChlYRQdm4" />
+    <title>AISSA SAW RAP - OFFICIAL SITE & BLOG</title>
+    
+    <!-- كود إعلانات Google AdSense الخاص بك لحل مشكلة المراجعة والأرشفة -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1489525782335546" crossorigin="anonymous"></script>
+    
+    <!-- استيراد خطوط احترافية من جوجل -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        *{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: #0a0a0a; color: #ffffff; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+        /* الهيرو الرئيسي */
+        .hero {
+            width: 100%;
+            min-height: 75vh;
+            background: #000 url('hero.jpg') center center/cover no-repeat;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.3) 50%, rgba(10,10,10,1) 100%);
+            z-index: 1;
+        }
+
+        .nav { position: relative; z-index: 5; display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; }
+        .logo { font-size: 26px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; }
+        .logo span { color: #ffcc33; }
+
+        .nav-links { display: flex; gap: 20px; align-items: center; z-index: 5; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: #ffcc33; }
+
+        .btn-top { background: #ffcc33; color: #000; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: 900; font-size: 13px; transition: all 0.3s ease; }
+        .btn-top:hover { background: #ffe066; transform: translateY(-2px); }
+
+        .content { position: relative; z-index: 5; padding: 0 40px; margin-bottom: 40px; max-width: 650px; }
+        .small { color: #ffcc33; font-size: 13px; font-weight: 700; letter-spacing: 4px; border-left: 4px solid #ffcc33; padding-left: 12px; margin-bottom: 15px; }
+        .big { font-size: 54px; font-weight: 900; line-height: 1; }
+        .big span { color: #ffcc33; }
+        .desc { color: #b3b3b3; font-size: 16px; margin-top: 20px; line-height: 1.6; }
+
+        /* مساحة إعلانية مرنة مجهزة */
+        .ads-container { margin: 20px 40px; text-align: center; }
+
+        /* قسم المدونة */
+        .blog-section { padding: 40px 40px 60px; background: #0a0a0a; position: relative; z-index: 5; }
+        .section-title { font-size: 32px; font-weight: 900; margin-bottom: 40px; text-transform: uppercase; border-bottom: 2px solid #222; padding-bottom: 15px; }
+        .section-title span { color: #ffcc33; }
+
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        /* تصميم بطاقات المقالات المجلوبة تلقائياً */
+        .blog-card { background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden; transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
+        .blog-card:hover { transform: translateY(-5px); border-color: #ffcc33; box-shadow: 0 5px 15px rgba(255, 204, 51, 0.1); }
+        .blog-content { padding: 25px; }
+        .blog-date { color: #ffcc33; font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+        .blog-h { font-size: 20px; font-weight: 900; margin-bottom: 12px; color: #fff; line-height: 1.4; }
+        .blog-p { color: #aaa; font-size: 14px; line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow-x: hidden; text-overflow: ellipsis; }
+        .read-more { color: #ffcc33; text-decoration: none; font-weight: 700; font-size: 14px; }
+        .read-more:hover { text-decoration: underline; }
+
+        .footer { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; font-size: 12px; color: #777; border-top: 1px solid #222; background: #050505; }
+        .footer-links a { color: #777; text-decoration: none; margin-right: 15px; }
+        .footer-links a:hover { color: #ffcc33; }
+
+        @media (max-width: 768px) {
+            .nav { padding: 20px; flex-direction: column; gap: 15px; }
+            .nav-links { flex-direction: column; gap: 10px; }
+            .content, .blog-section { padding: 20px; }
+            .big { font-size: 38px; }
+            .footer { flex-direction: column; gap: 15px; text-align: center; }
+            .ads-container { margin: 20px; }
+        }
+    </style>
 </head>
 <body>
+
 <div class="hero">
-<div class="nav">
-<div class="logo">AISSA SAW <span>RAP</span></div>
-<a class="btn-top" href="https://youtu.be/ja_aSZHIkN0">LISTEN NOW</a>
+    <div class="nav">
+        <div class="logo">AISSA SAW <span>RAP</span></div>
+        <div class="nav-links">
+            <a href="#">Accueil</a>
+            <a href="#blog">Blog</a>
+            <a class="btn-top" href="https://youtu.be" target="_blank">LISTEN NOW</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="small">NOUVEAU SINGLE</div>
+        <div class="big">EDDENIA <span>•</span> الدنيا</div>
+        <div class="desc">Découvrez le nouveau projet de Aissa Saw. Un style unique qui mélange le Rap et le Rai pour raconter la dure réalité de la vie.</div>
+    </div>
 </div>
-<div class="content">
-<div class="small">NOUVEAU SINGLE • DISPO</div>
-<div class="big">FLAMEN <span>•</span> OUT NOW</div>
-<div class="desc">Le nouveau son de Aissa Saw Rap - Le clip officiel est maintenant disponible.</div>
-<div class="btns">
-<a class="b y" href="https://youtu.be/ja_aSZHIkN0">ÉCOUTER</a>
-<a class="b o" href="https://youtu.be/ja_aSZHIkN0">CLIP</a>
+
+<!-- مساحة مخصصة لعرض إعلان تلقائي داخل الموقع لرفع الأرباح -->
+<div class="ads-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1489525782335546"
+         data-ad-slot="default"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script> (adsbygoogle = window.adsbygoogle || []).push({}); </script>
 </div>
+
+<!-- قسم المدونة الرئيسي -->
+<div class="blog-section" id="blog">
+    <h2 class="section-title">Mon <span>Blog</span> / آخر المقالات اليومية</h2>
+    <div class="blog-grid" id="blogger-posts">
+        <p style="color: #666;">جاري تحميل مقالاتك الفنية وتنسيقها من بلوغر...</p>
+    </div>
 </div>
+
 <div class="footer">
-<div>YOUTUBE • INSTA • TIKTOK</div>
-<div>© 2025 AISSA SAW - CADEAU D'UN AMI</div>
+    <div class="footer-links">
+        <a href="https://youtu.be" target="_blank">YOUTUBE</a> • 
+        <a href="https://instagram.com" target="_blank">INSTAGRAM</a> • 
+        <a href="https://tiktok.com" target="_blank">TIKTOK</a>
+    </div>
+    <div>© 2025 AISSA SAW</div>
 </div>
-</div>
+
+<!-- معالجة وتنسيق خلاصة مقالات بلوغر تلقائياً سحابياً -->
+<script>
+    function handleBloggerData(json) {
+        var posts = json.feed.entry;
+        var html = '';
+        
+        if (posts) {
+            var maxPosts = Math.min(posts.length, 3); 
+            for (var i = 0; i < maxPosts; i++) {
+                var entry = posts[i];
+                var title = entry.title.$t;
+                var content = entry.summary ? entry.summary.$t : (entry.content ? entry.content.$t : '');
+                var cleanDesc = content.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 130) + "...";
+                
+                var publishDate = new Date(entry.published.$t);
+                var formattedDate = publishDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'LONG', year: 'numeric' });
+                
+                var link = '';
+                for (var j = 0; j < entry.link.length; j++) {
+                    if (entry.link[j].rel == 'alternate') { link = entry.link[j].href; break; }
+                }
+                
+                html += '<div class="blog-card">';
+                html += '  <div class="blog-content">';
+                html += '    <div class="blog-date">' + formattedDate.toUpperCase() + '</div>';
+                html += '    <h3 class="blog-h">' + title + '</h3>';
+                html += '    <p class="blog-p">' + cleanDesc + '</p>';
+                html += '    <a href="' + link + '" target="_blank" class="read-more">Lire la suite...</a>';
+                html += '  </div>';
+                html += '</div>';
+            }
+        } else {
+            html = '<p style="color: #666;">لا توجد مقالات منشورة في المدونة حالياً.</p>';
+        }
+        document.getElementById('blogger-posts').innerHTML = html;
+    }
+</script>
+
+<!-- اتصال سحابي آمن مع سرفر خلاصة بلوغر الخاص بك -->
+<script src="https://blogspot.com"></script>
+
 </body>
 </html>
