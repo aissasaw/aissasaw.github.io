@@ -19,9 +19,23 @@
 <h2 class="text-3xl font-black text-amber-500 mt-2 leading-tight">صوت الحومة من قلب الجزائر</h2>
 <p class="text-white/60 text-sm leading-7 mt-6">من أزقة باب الواد وساحات العاصمة الشامخة أمام مقام الشهيد، انطلق aissasaw حاملاً صوته وقضايا الشباب الجزائري في فلو حاد وإيقاعات درل وتراب ثقيلة.</p>
 <div class="mt-8 space-y-3">
-<div class="bg-white/5 border border-white/10 py-4 rounded-xl text-center font-bold text-sm">📖 تصفح المدونة واليوميات الحصرية</div>
-<div class="bg-amber-500/10 border border-amber-500/30 text-amber-400 py-4 rounded-xl text-center font-bold text-sm">⚡ مولد القوافي الذكي (AI Bars)</div>
+<div class="bg-white/5 border border-white/10 py-4 rounded-xl text-center font-bold text-sm cursor-pointer hover:bg-white/10 transition">📖 تصفح المدونة واليوميات الحصرية</div>
+
+<!-- زر تشغيل المولد الذكي التفاعلي -->
+<button onclick="toggleAiStudio()" class="w-full bg-amber-500/10 border border-amber-500/30 text-amber-400 py-4 rounded-xl text-center font-bold text-sm hover:bg-amber-500/20 transition block">⚡ مولد القوافي الذكي (AI Bars)</button>
 </div>
+
+<!-- واجهة استوديو الذكاء الاصطناعي المخفية وتظهر عند الضغط -->
+<div id="ai-studio" class="hidden mt-6 p-4 border border-amber-500/20 bg-amber-500/5 rounded-2xl transition-all duration-300">
+<h3 class="text-lg font-bold text-amber-400 mb-2">🎤 اكتب موضوع الأغنية أو الكلمة المفتاحية:</h3>
+<div class="flex gap-2">
+<input type="text" id="user-prompt" placeholder="مثال: الغربة، ولاد الحومة، الموزيكا..." class="w-full bg-black/60 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500 text-white">
+<button onclick="generateBars()" id="btn-generate" class="bg-amber-500 text-black px-5 py-3 rounded-xl font-bold text-sm hover:bg-amber-400 transition whitespace-nowrap">توليد 🔥</button>
+</div>
+<!-- مكان ظهور كلمات الراب المتولدة -->
+<div id="ai-output" class="hidden mt-4 p-4 bg-black/80 border border-white/5 rounded-xl text-center whitespace-pre-line text-sm leading-8 text-white/90 font-medium"></div>
+</div>
+
 <div class="grid grid-cols-2 gap-6 mt-10 pt-6 border-t border-white/10">
 <div><p class="text-2xl font-black">4,120,800</p><p class="text-xs text-white/40">مستمع شهرياً</p></div>
 <div><p class="text-2xl font-black">+198M</p><p class="text-xs text-white/40">إجمالي الاستماعات</p></div>
@@ -30,7 +44,54 @@
 </div>
 <div class="fixed bottom-0 inset-x-0 bg-black border-t border-white/10 p-3 flex justify-between items-center">
 <div class="flex gap-3 items-center"><img src="https://i.imgur.com/8Km9tLL.jpg" class="w-11 h-11 rounded-lg bg-zinc-800"><div><p class="text-xs font-bold">سقفة DRILL</p><p class="text-[11px] text-amber-400">140 BPM • prod</p></div></div>
-<div class="flex gap-2 items-center"><span class="text-xl">⏮</span><span class="w-10 h-10 bg-amber-500 rounded-full grid place-items-center text-black">▶</span><span class="text-xl">⏭</span></div>
+<div class="flex gap-2 items-center"><span class="text-xl cursor-pointer">⏮</span><span class="w-10 h-10 bg-amber-500 rounded-full grid place-items-center text-black cursor-pointer hover:bg-amber-400 transition">▶</span><span class="text-xl cursor-pointer">⏭</span></div>
 </div>
+
+<script>
+// ضع مفتاح الـ API الخاص بك هنا من Google AI Studio لتفعيل المولد
+const GEMINI_API_KEY = "ضع_مفتاح_API_الخاص_بك_هنا";
+
+function toggleAiStudio() {
+    const studio = document.getElementById('ai-studio');
+    studio.classList.toggle('hidden');
+}
+
+async function generateBars() {
+    const promptInput = document.getElementById('user-prompt').value.trim();
+    const outputDiv = document.getElementById('ai-output');
+    const btn = document.getElementById('btn-generate');
+    
+    if(!promptInput) return alert("اكتب موضوعاً أولاً يا فنان!");
+    
+    // تفعيل حالة التحميل
+    outputDiv.classList.remove('hidden');
+    outputDiv.innerHTML = "⏳ جاري كتابة السطور من قلب العاصمة...";
+    btn.disabled = true;
+    btn.innerText = "...";
+
+    try {
+        const response = await fetch(`https://googleapis.com{GEMINI_API_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{
+                        text: `اكتب 4 أسطر راب (Bars) حادة وقوية باللهجة الجزائرية (دارجة) بأسلوب راب الشارع والدرل (Drill) عن موضوع: "${promptInput}". اكتب الأسطر فقط دون مقدمات أو ترحيب وبشكل منسق عمودياً.`
+                    }]
+                }]
+            })
+        });
+
+        const data = await response.json();
+        const text = data.candidates[0].content.parts[0].text;
+        outputDiv.innerHTML = `🎤 <b>السطور الجديدة:</b>\n\n${text}`;
+    } catch (error) {
+        outputDiv.innerHTML = "❌ حدث خطأ أثناء الاتصال بالاستوديو. تأكد من إدخال مفتاح API الصحيح.";
+    } finally {
+        btn.disabled = false;
+        btn.innerText = "توليد 🔥";
+    }
+}
+</script>
 </body>
 </html>
