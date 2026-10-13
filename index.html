@@ -1,28 +1,33 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AISSA SAW | Algerian Rap</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AISSA SAW</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}
-h1{font-size:42px;margin-top:30px;font-weight:900}
-h1 span{color:#ff1a1a}
-.bio{max-width:500px;margin:20px auto;background:#111;padding:20px;border-radius:15px;line-height:1.7;color:#ccc;font-size:16px}
-.btn{display:inline-block;background:#ff1a1a;color:#fff;padding:14px 28px;border-radius:50px;margin:8px;text-decoration:none;font-weight:bold}
-.songs{max-width:500px;margin:30px auto;text-align:right}
-.song{background:#111;padding:15px;border-radius:12px;margin:10px 0;display:flex;justify-content:space-between;align-items:center}
-.song b{color:#fff}
-.ai-box{max-width:500px;margin:30px auto;background:#151515;padding:20px;border-radius:15px;border:1px solid #222}
-input{width:100%;padding:12px;border-radius:10px;border:none;margin:10px 0;background:#222;color:#fff;text-align:center}
-#result{margin-top:15px;color:#ff1a1a;font-weight:bold;min-height:20px}
+body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:15px}
+h1{font-size:40px;margin:20px 0} span{color:red}
+.box{background:#111;padding:15px;border-radius:12px;margin:15px auto;max-width:400px}
+a{display:block;background:red;color:#fff;padding:12px;margin:8px;border-radius:25px;text-decoration:none;font-weight:bold}
 </style>
 </head>
 <body>
-
 <h1>AISSA <span>SAW</span></h1>
-<p style="color:#888;margin-top:5px">Algerian Rap | باب الواد</p>
+<p>Algerian Rap | باب الواد</p>
 
-<div class="bio">
-من باب الواد للعالم. راب ح
+<div class="box">من باب الواد للعالم. راب حقيقي بلا تصنع.</div>
+
+<a href="https://open.spotify.com/search/Aissa%20Saw">🔥 Spotify</a>
+<a href="https://audiomack.com/aissa-saw">🎵 Audiomack</a>
+<a href="#">▶️ Bab El Oued State</a>
+<a href="#">▶️ Ma Nensakch</a>
+
+<div class="box">
+<input id="w" placeholder="اكتب كلمة" style="width:90%;padding:10px;border-radius:10px;border:none;text-align:center">
+<button onclick="document.getElementById('r').innerText='في '+w.value+' نكتب الراب، من القلب للواد'" style="background:red;color:#fff;border:none;padding:10px 20px;border-radius:20px;margin-top:10px">ولد قافية</button>
+<p id="r" style="margin-top:10px;color:red;font-weight:bold"></p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:20px">aissasaw.github.io</p>
+</body>
+</html>
