@@ -2,34 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://aissasaw.github.io/</loc>
+    <lastmod>2026-10-24</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://aissasaw.github.io/bio.html</loc>
+    <loc>https://aissasaw.github.io/about.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aissasaw.github.io/contact.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://aissasaw.github.io/about.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aissasaw.github.io/privacy.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://aissasaw.github.io/rap-history.html</loc>
+    <loc>https://aissasaw.github.io/aissa-saw.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://aissasaw.github.io/soundproofing-guide.html</loc>
+    <loc>https://aissasaw.github.io/rap-history.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://aissasaw.github.io/acoustic-foam-guide.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://aissasaw.github.io/microphone-guide.html</loc>
+    <lastmod>2026-10-24</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>
