@@ -1,1 +1,10 @@
-https://aissasaw.github.io/sitemap.xml
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+Sitemap: https://aissasaw.github.io/sitemap.xml
