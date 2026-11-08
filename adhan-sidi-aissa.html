@@ -2,16 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>مسجد سيدي عيسى</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مسجد سيدي عيسى - عبدلي فارس</title>
 <meta name="theme-color" content="#000000">
 <link rel="manifest" href="manifest.json">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#000;color:#fff;text-align:center;padding:15px}
 .top{border:1px solid #c9a227;border-radius:15px;padding:12px;margin-bottom:12px}
-.top h1{color:#f5c518;font-size:22px}
+.top h1{color:#f5c518;font-size:23px}
 .top p{font-size:15px;margin-top:5px}
+.top .name{color:#f5c518;font-size:14px;margin-top:6px}
 .date-box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin-bottom:12px}
 .date-box div{font-size:17px;margin:5px 0}
 .date-box b{color:#f5c518}
@@ -23,6 +24,12 @@ body{background:#000;color:#fff;text-align:center;padding:15px}
 button{width:100%;padding:14px;border:none;border-radius:12px;font-size:18px;font-weight:bold;cursor:pointer;margin-bottom:10px}
 .btn-gold{background:#f5c518;color:#000}
 .btn-green{background:#1a7a3a;color:#fff}
+.btn-dark{background:#222;color:#fff;border:1px solid #444}
+.mp3-box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin-bottom:12px;text-align:right}
+.mp3-box h3{color:#f5c518;font-size:16px;margin-bottom:8px;text-align:center}
+.mp3-box button{font-size:15px;padding:10px;margin-bottom:6px}
+.footer{color:#999;font-size:14px;margin-top:10px;line-height:1.8}
+.footer b{color:#f5c518}
 small{color:#999;font-size:13px;line-height:1.7;display:block;margin-top:8px}
 </style>
 </head>
@@ -31,85 +38,33 @@ small{color:#999;font-size:13px;line-height:1.7;display:block;margin-top:8px}
 <div class="top">
 <h1>🕌 مسجد سيدي عيسى</h1>
 <p>حيّ على الصلاة - سيدي عيسى، المسيلة، الجزائر</p>
+<div class="name">بإشراف: عبدلي فارس</div>
 </div>
 
+<!-- 3 - التاريخ الهجري + الميلادي -->
 <div class="date-box">
-<div>📅 الميلادي: <b id="greg">جاري التحميل...</b></div>
-<div>🌙 الهجري: <b id="hijri">جاري التحميل...</b></div>
+<div>📅 الميلادي: <b id="greg">...</b></div>
+<div>🌙 الهجري: <b id="hijri">...</b></div>
 <div id="nextPrayer" class="count">...</div>
 </div>
 
-<div class="prayer" id="prayers"></div>
+<!-- 1 - مواقيت الصلاة كاملة -->
+<div class="prayer" id="prayers">
+<div class="row" data-time="05:42"><span>الفجر</span><span>05:42</span></div>
+<div class="row" data-time="07:08"><span>الشروق</span><span>07:08</span></div>
+<div class="row" data-time="12:36"><span>الظهر</span><span>12:36</span></div>
+<div class="row" data-time="15:28"><span>العصر</span><span>15:28</span></div>
+<div class="row" data-time="17:54"><span>المغرب</span><span>17:54</span></div>
+<div class="row" data-time="19:18"><span>العشاء</span><span>19:18</span></div>
+</div>
 
-<button class="btn-gold" id="adhanBtn" onclick="enableAdhan()">🔊 تفعيل الأذان الأوتوماتيك</button>
-<button class="btn-green" id="installBtn" style="display:none">📲 تحميل التطبيق</button>
+<!-- 2 - 3 ملفات mp3 -->
+<div class="mp3-box">
+<h3>🔊 ملفات الصوت - 3 MP3</h3>
+<button class="btn-dark" onclick="playMp3('adhan.mp3')">▶️ تشغيل 1 - الأذان العادي - adhan.mp3</button>
+<button class="btn-dark" onclick="playMp3('adhan2.mp3')">▶️ تشغيل 2 - أذان الفجر - adhan2.mp3</button>
+<button class="btn-dark" onclick="playMp3('adhan3.mp3')">▶️ تشغيل 3 - الدعاء - adhan3.mp3</button>
+</div>
 
-<audio id="adhanAudio" src="adhan.mp3" preload="auto"></audio>
-
-<small>1- دير على "تفعيل الأذان" مرة وحدة<br>2- من بعد كي يلحق وقت الصلاة الأذان يخدم وحدو<br>3- ملف الأذان اسمه <b>adhan.mp3</b> بجانب الصفحة</small>
-
-<script>
-// === التاريخ الميلادي + الهجري ===
-var now = new Date();
-try {
-  document.getElementById('greg').textContent = now.toLocaleDateString('ar-DZ',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-} catch(e){
-  document.getElementById('greg').textContent = now.toDateString();
-}
-try {
-  document.getElementById('hijri').textContent = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}).format(now);
-} catch(e){
-  try{
-    document.getElementById('hijri').textContent = new Intl.DateTimeFormat('ar-u-ca-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now);
-  }catch(e2){
-    document.getElementById('hijri').textContent = "17 جمادى الأولى 1448 هـ";
-  }
-}
-
-// === أوقات الصلاة سيدي عيسى - داخل الكود ===
-var times = {"Fajr":"05:42","Sunrise":"07:08","Dhuhr":"12:36","Asr":"15:28","Maghrib":"17:54","Isha":"19:18"};
-var names = {"Fajr":"الفجر","Sunrise":"الشروق","Dhuhr":"الظهر","Asr":"العصر","Maghrib":"المغرب","Isha":"العشاء"};
-
-function render(){
-  var h="";
-  var n=new Date();
-  var cur=n.getHours()*60+n.getMinutes();
-  var nextName="", nextDiff=99999;
-  for(var k in names){
-    var p=times[k].split(":");
-    var mins=parseInt(p[0])*60+parseInt(p[1]);
-    var isActive = Math.abs(cur-mins)<30;
-    if(mins>cur && mins-cur<nextDiff){nextDiff=mins-cur; nextName=names[k];}
-    h+='<div class="row '+(isActive?'active':'')+'"><span>'+names[k]+'</span><span>'+times[k]+'</span></div>';
-  }
-  document.getElementById('prayers').innerHTML=h;
-  if(nextName){
-    var hh=Math.floor(nextDiff/60), mm=nextDiff%60;
-    document.getElementById('nextPrayer').textContent="الصلاة القادمة: "+nextName+" بعد "+hh+" سا و "+mm+" د";
-  } else {
-    document.getElementById('nextPrayer').textContent="الصلاة القادمة: الفجر غداً";
-  }
-}
-render();
-
-// === تحديث الأوقات من الانترنت - سيدي عيسى بالإحداثيات ===
-fetch("https://api.aladhan.com/v1/timings?latitude=35.886&longitude=3.774&method=5")
-.then(function(r){return r.json()}).then(function(d){
-  if(d.data && d.data.timings){
-    times.Fajr=d.data.timings.Fajr.slice(0,5);
-    times.Sunrise=d.data.timings.Sunrise.slice(0,5);
-    times.Dhuhr=d.data.timings.Dhuhr.slice(0,5);
-    times.Asr=d.data.timings.Asr.slice(0,5);
-    times.Maghrib=d.data.timings.Maghrib.slice(0,5);
-    times.Isha=d.data.timings.Isha.slice(0,5);
-    render();
-  }
-}).catch(function(){});
-
-// === الأذان الأوتوماتيك - ملف adhan.mp3 ===
-var adhanEnabled=false;
-var lastPlayed="";
-function enableAdhan(){
-  adhanEnabled=true;
-  var a=document.getElementById('adhanAudio');
-  a
+<button class="btn-gold" id="adhanBtn">🔊 تفعيل الأذان الأوتوماتيك</button>
+<button class="btn-green" id="installBtn" style="display:none">
