@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أذان سيدي عيسى - للعائلة</title>
+<style>
+body{font-family:Arial;text-align:center;background:#0f3d2e;color:#fff;margin:0;padding:15px}
+h1{font-size:22px}
+.box{background:#fff;color:#000;border-radius:15px;padding:15px;margin:10px 0}
+.prayer{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #ddd;font-size:18px}
+.prayer.active{background:#ffeaa7;font-weight:bold}
+#next{font-size:20px;color:#ffeaa7;margin:10px}
+button{background:#f1c40f;border:0;padding:12px 20px;border-radius:10px;font-size:18px;width:100%;margin-top:10px}
+small{opacity:.7}
+</style>
+</head>
+<body>
+<h1>🕌 أذان سيدي عيسى</h1>
+<p>تطبيق العائلة - شخصي</p>
+<div id="date"></div>
+<div id="next">جاري جلب الأوقات...</div>
+<div class="box" id="times"></div>
+<button onclick="playAdhan()">🔊 جرب صوت الأذان</button>
+<button onclick="enableNotif()">🔔 فعل التنبيه</button>
+<p><small>يخدم في كل الهواتف - حتى أندرويد نازل<br>صُنع للعائلة فقط</small></p>
+
+<audio id="adhanAudio" src="https://www.islamcan.com/audio/adhan/azan1.mp3" preload="auto"></audio>
+
+<script>
+// مدينة سيدي عيسى - المسيلة
+const CITY = "Sidi Aissa";
+const COUNTRY = "Algeria";
+const METHOD = 5; // رابطة العالم الإسلامي - نفس توقيت الجزائر
+
+async function loadTimes(){
+  try{
+    const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${CITY}&country=${COUNTRY}&method=${METHOD}`);
+    const data = await res.json();
+    const t = data.data.timings;
+    const clean = (s)=> s.split(" ")[0].slice(0,5);
+    const prayers = [
+      {name:"الفجر", time:clean(t.Fajr)},
+      {name:"الشروق", time:clean(t.Sunrise)},
+      {name:"الظهر", time:clean(t.Dhuhr)},
+      {name:"العصر", time:clean(t.Asr)},
+      {name:"المغرب", time:clean(t.Maghrib)},
+      {name:"العشاء", time:clean(t.Isha)},
+    ];
+    localStorage.setItem("prayers", JSON.stringify(prayers));
+    localStorage.setItem("date", data.data.date.hijri.day + " " + data.data.date.hijri.month.ar + " " + data.data.date.hijri.year);
+    showTimes(prayers);
+    checkTime(prayers);
+  }catch(e){
+    // إذا مكانش انترنت - نستعمل أوقات اليوم 8 نوفمبر
+    const fallback = [
+      {name:"الفجر", time:"05:46"},
+      {name:"الشروق", time:"07:14"},
+      {name:"الظهر", time:"12:29"},
+      {name:"العصر", time:"03:21"},
+      {name:"المغرب", time:"05:44"},
+      {name:"العشاء", time:"07:05"},
+    ];
+    showTimes(fallback);
+  }
+}
+
+function showTimes(prayers){
+  document.getElementById("date").innerText = new Date().toLocaleDateString("ar-DZ",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  let html = "";
+  prayers.forEach(p=>{
+    if(p.name==="الشروق") return;
+    html += `<div class="prayer" id="p-${p.name}"><span>${p.name}</span><b>${p.time}</b></div>`;
+  });
+  document.getElementById("times").innerHTML = html;
+}
+
+function playAdhan(){
+  document.getElementById("adhanAudio").play();
+}
+
+function enableNotif(){
+  if("Notification" in window){
+    Notification.requestPermission().then(p=>{
+      if(p==="granted") alert("تم تفعيل التنبيه يا عيسى");
+    });
+  } else alert("هاتفك لا يدعم التنبيه، لكن الأذان سيعمل عند فتح التطبيق");
+}
+
+function checkTime(prayers){
+  setInterval(()=>{
+    const now = new Date();
+    const nowStr = now.getHours().toString().padStart(2,"0")+":"+now.getMinutes().toString().padStart(2,"0");
+    prayers.forEach(p=>{
+      if(p.time===nowStr && p.name!=="الشروق"){
+        // يأذن مرة واحدة في الدقيقة
+        if(localStorage.getItem("lastAdhan")!==nowStr+"-"+p.name){
+          localStorage.setItem("lastAdhan", nowStr+"-"+p.name);
+          playAdhan();
+          document.getElementById("next").innerText = "الآن: أذان " + p.name + " 🕌";
+          if(Notification.permission==="granted") new Notification("حان الآن وقت "+p.name, {body:"سيدي عيسى - "+p.time});
+        }
+      }
+    });
+    // الصلاة القادمة
+    let next = prayers.find(p=>p.time>nowStr && p.name!=="الشروق");
+    if(!next) next = prayers[0];
+    document.getElementById("next").innerText = "الصلاة القادمة: " + next.name + " على " + next.time;
+  }, 1000*10); // يتحقق كل 10 ثواني - خفيف على الباتري
+}
+
+loadTimes();
+</script>
+</body>
+</html>
