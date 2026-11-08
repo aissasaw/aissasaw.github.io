@@ -2,127 +2,67 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>أذان سيدي عيسى</title>
-  <link rel="manifest" href="manifest.json">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>مسجد سطيف</title>
+<meta name="theme-color" content="#000000">
+<link rel="manifest" href="manifest.json">
 <style>
-body{background:#0f3d2e;color:white;text-align:center;padding:20px;font-family:Arial}
-h1{font-size:32px}
-.sub{color:#ffd700;margin-bottom:20px}
-.box{background:#1a5a44;padding:15px;border-radius:15px;margin-bottom:15px}
-#clock{font-size:55px;font-weight:bold}
-#next{background:#ffd700;color:#000;padding:15px;border-radius:15px;font-weight:bold;margin:15px 0}
-#next span{font-size:28px;display:block}
-.prayer{display:flex;justify-content:space-between;background:white;color:#222;padding:14px;margin:8px 0;border-radius:12px;font-size:20px;font-weight:bold}
-.prayer.active{background:#ffd700}
-button{background:#ffd700;border:0;padding:15px;border-radius:50px;font-size:19px;font-weight:bold;margin-top:12px;width:100%}
-#msg{margin-top:10px;color:#ffd700;font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#000;color:#fff;text-align:center;padding:15px}
+.top{border:1px solid #c9a227;border-radius:15px;padding:12px;margin-bottom:12px}
+.top h1{color:#f5c518;font-size:22px;margin-bottom:5px}
+.top p{font-size:15px;line-height:1.7}
+.date-box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin-bottom:12px}
+.date-box b{color:#f5c518}
+.date-box div{font-size:17px;margin:4px 0}
+.count{font-size:14px;color:#ccc;margin:8px 0}
+.prayer{background:#111;border-radius:12px;overflow:hidden;margin-bottom:12px}
+.row{display:flex;justify-content:space-between;padding:13px 15px;border-bottom:1px solid #222;font-size:18px}
+.row:last-child{border:none}
+.row.active{background:#f5c518;color:#000;font-weight:bold}
+.row span:last-child{font-weight:bold}
+button{width:100%;padding:14px;border:none;border-radius:12px;font-size:18px;font-weight:bold;cursor:pointer;margin-bottom:10px}
+.btn-gold{background:#f5c518;color:#000}
+.btn-green{background:#1a7a3a;color:#fff}
+small{color:#999;font-size:13px;line-height:1.6;display:block;margin-top:8px}
 </style>
 </head>
 <body>
-<h1>🕌 أذان سيدي عيسى</h1>
-<div class="sub">سيدي عيسى - المسيلة</div>
-<div class="box"><div id="clock">--:--:--</div><div>سيدي عيسى - الجزائر</div></div>
-<div id="next">...</div>
-<div id="list"></div>
-<button onclick="playAdhan()">▶ تشغيل الأذان الآن</button>
-<div id="msg"></div>
 
-<div style="margin-top:20px;padding:15px;background:rgba(255,255,255,0.12);border-radius:15px;">
-  <div style="font-size:20px;font-weight:bold;color:#ffd700;">صنع بحب ❤️</div>
-  <div style="font-size:22px;font-weight:bold;margin-top:5px;">عبدلي فارس</div>
-  <div style="font-size:14px;opacity:0.8;margin-top:3px;">سيدي عيسى - المسيلة - الجزائر</div>
+<div class="top">
+<h1>🕌 مسجد سطيف</h1>
+<p>حيّ على الصلاة - سطيف، الجزائر</p>
 </div>
-<small>الأذان داخل التطبيق - ملف adhan.mp3</small>
 
-<audio id="a" preload="auto" playsinline>
-  <source src="adhan.mp3" type="audio/mpeg">
-  <source src="./adhan.mp3" type="audio/mpeg">
-</audio>
+<div class="date-box">
+<div>📅 الميلادي: <b id="greg">...</b></div>
+<div>🌙 الهجري: <b id="hijri">...</b></div>
+<div id="nextPrayer" class="count">...</div>
+</div>
+
+<div class="prayer" id="prayers"></div>
+
+<button class="btn-gold" id="adhanBtn" onclick="enableAdhan()">🔊 تفعيل الأذان الأوتوماتيك</button>
+<button class="btn-green" id="installBtn" style="display:none">📲 تحميل التطبيق</button>
+
+<audio id="adhanAudio" src="adhan.mp3" preload="auto"></audio>
+<small>1- دير على "تفعيل الأذان" مرة وحدة<br>2- من بعد كي يلحق وقت الصلاة الأذان يخدم وحدو<br>3- حط ملف الأذان بجانب الصفحة واسمه <b>adhan.mp3</b></small>
 
 <script>
-var times = {};
-times.Fajr = "05:45";
-times.Sunrise = "07:10";
-times.Dhuhr = "12:45";
-times.Asr = "15:55";
-times.Maghrib = "18:20";
-times.Isha = "19:45";
-var order = ["Fajr","Sunrise","Dhuhr","Asr","Maghrib","Isha"];
-var names = {};
-names.Fajr = "الفجر";
-names.Sunrise = "الشروق";
-names.Dhuhr = "الظهر";
-names.Asr = "العصر";
-names.Maghrib = "المغرب";
-names.Isha = "العشاء";
-
-function render(){
-  var html = "";
-  for(var i=0;i<order.length;i++){
-    var k = order[i];
-    html = html + '<div class="prayer" id="p-'+k+'"><span>'+names[k]+'</span><span>'+times[k]+'</span></div>';
-  }
-  document.getElementById("list").innerHTML = html;
+// ===== التاريخ الميلادي + الهجري =====
+let now = new Date();
+document.getElementById('greg').textContent = now.toLocaleDateString('ar-DZ',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+try{
+  document.getElementById('hijri').textContent = new Intl.DateTimeFormat('ar-SA-u-ca-islamic',{day:'numeric',month:'long',year:'numeric'}).format(now);
+}catch(e){
+  document.getElementById('hijri').textContent = "—";
 }
 
-function playAdhan(){
-  var au = document.getElementById("a");
-  var msg = document.getElementById("msg");
-  msg.innerText = "جاري تشغيل الأذان... علي الصوت 🔊";
-  au.volume = 1;
-  try{ au.currentTime = 0; }catch(e){}
-  au.load();
-  var p = au.play();
-  if(p){
-    p.then(function(){
-      msg.innerText = "✅ راهو يخدم الأذان داخل التطبيق 🔊";
-    }).catch(function(e){
-      msg.innerText = "المتصفح حبس الصوت، عاود دير على الزر مرة أخرى";
-      au.src = "adhan.mp3";
-      au.play();
-    });
-  } else {
-    msg.innerText = "✅ راهو يخدم";
-  }
-}
+// ===== أوقات الصلاة - سطيف =====
+let times = {"Fajr":"05:35","Sunrise":"07:02","Dhuhr":"12:32","Asr":"15:25","Maghrib":"17:50","Isha":"19:15"};
+let names = {"Fajr":"الفجر","Sunrise":"الشروق","Dhuhr":"الظهر","Asr":"العصر","Maghrib":"المغرب","Isha":"العشاء"};
 
-function tick(){
-  var now = new Date();
-  var h = now.getHours();
-  var m = now.getMinutes();
-  var s = now.getSeconds();
-  if(h<10) h="0"+h;
-  if(m<10) m="0"+m;
-  if(s<10) s="0"+s;
-  document.getElementById("clock").innerText = h+":"+m+":"+s;
-  var nextName = "Fajr";
-  var nextTime = null;
-  for(var i=0;i<order.length;i++){
-    var k = order[i];
-    if(k==="Sunrise") continue;
-    var parts = times[k].split(":");
-    var d = new Date();
-    d.setHours(parseInt(parts[0]), parseInt(parts[1]), 0, 0);
-    if(d > now){ nextName = k; nextTime = d; break; }
-  }
-  if(nextTime === null){
-    var p2 = times["Fajr"].split(":");
-    var d2 = new Date();
-    d2.setDate(d2.getDate()+1);
-    d2.setHours(parseInt(p2[0]), parseInt(p2[1]), 0, 0);
-    nextName = "Fajr";
-    nextTime = d2;
-  }
-  var diff = nextTime - now;
-  var hh = Math.floor(diff/3600000);
-  var mm = Math.floor(diff%3600000/60000);
-  var ss = Math.floor(diff%60000/1000);
-  document.getElementById("next").innerHTML = "الصلاة القادمة: " + names[nextName] + " - " + times[nextName] + "<span>" + hh + " سا : " + mm + " د : " + ss + " ثا</span>";
-}
-render();
-tick();
-setInterval(tick, 1000);
-</script>
-</body>
-</html>
+fetch("https://api.aladhan.com/v1/timingsByCity?city=Setif&country=Algeria&method=5")
+.then(r=>r.json()).then(d=>{
+  if(d.data && d.data.timings){
+    times.Fajr=d.data.timings.F
