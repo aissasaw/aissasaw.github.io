@@ -15,17 +15,30 @@ h1{font-size:32px}
 .prayer{display:flex;justify-content:space-between;background:white;color:#222;padding:14px;margin:8px 0;border-radius:12px;font-size:20px;font-weight:bold}
 .prayer.active{background:#ffd700}
 button{background:#ffd700;border:0;padding:15px;border-radius:50px;font-size:19px;font-weight:bold;margin-top:12px;width:100%}
+#msg{margin-top:10px;color:#ffd700;font-weight:bold}
 </style>
 </head>
 <body>
 <h1>🕌 أذان سيدي عيسى</h1>
 <div class="sub">سيدي عيسى - المسيلة</div>
-<div class="box"><div id="clock">--:--:--</div><div>الأحد 8 نوفمبر 2026 - سيدي عيسى</div></div>
+<div class="box"><div id="clock">--:--:--</div><div>سيدي عيسى - الجزائر</div></div>
 <div id="next">...</div>
 <div id="list"></div>
 <button onclick="playAdhan()">▶ تشغيل الأذان الآن</button>
-<small>الأوقات تقريبية لسيدي عيسى</small>
-<audio id="a" src="https://cdn.aladhan.com/audio/adhan/a1.mp3"></audio>
+<div id="msg"></div>
+
+<div style="margin-top:20px;padding:15px;background:rgba(255,255,255,0.12);border-radius:15px;">
+  <div style="font-size:20px;font-weight:bold;color:#ffd700;">صنع بحب ❤️</div>
+  <div style="font-size:22px;font-weight:bold;margin-top:5px;">عبدلي فارس</div>
+  <div style="font-size:14px;opacity:0.8;margin-top:3px;">سيدي عيسى - المسيلة - الجزائر</div>
+</div>
+<small>الأذان داخل التطبيق - ملف adhan.mp3</small>
+
+<audio id="a" preload="auto" playsinline>
+  <source src="adhan.mp3" type="audio/mpeg">
+  <source src="./adhan.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 var times = {};
 times.Fajr = "05:45";
@@ -42,6 +55,7 @@ names.Dhuhr = "الظهر";
 names.Asr = "العصر";
 names.Maghrib = "المغرب";
 names.Isha = "العشاء";
+
 function render(){
   var html = "";
   for(var i=0;i<order.length;i++){
@@ -50,11 +64,28 @@ function render(){
   }
   document.getElementById("list").innerHTML = html;
 }
+
 function playAdhan(){
   var au = document.getElementById("a");
-  au.play();
-  alert("راهو يخدم الأذان 🔊");
+  var msg = document.getElementById("msg");
+  msg.innerText = "جاري تشغيل الأذان... علي الصوت 🔊";
+  au.volume = 1;
+  try{ au.currentTime = 0; }catch(e){}
+  au.load();
+  var p = au.play();
+  if(p){
+    p.then(function(){
+      msg.innerText = "✅ راهو يخدم الأذان داخل التطبيق 🔊";
+    }).catch(function(e){
+      msg.innerText = "المتصفح حبس الصوت، عاود دير على الزر مرة أخرى";
+      au.src = "adhan.mp3";
+      au.play();
+    });
+  } else {
+    msg.innerText = "✅ راهو يخدم";
+  }
 }
+
 function tick(){
   var now = new Date();
   var h = now.getHours();
