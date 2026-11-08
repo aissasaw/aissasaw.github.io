@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مسجد سيدي عيسى - عبدلي فارس</title>
-<meta name="theme-color" content="#000000">
-<link rel="manifest" href="manifest.json">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#000;color:#fff;text-align:center;padding:15px}
@@ -16,55 +14,74 @@ body{background:#000;color:#fff;text-align:center;padding:15px}
 .date-box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin-bottom:12px}
 .date-box div{font-size:17px;margin:5px 0}
 .date-box b{color:#f5c518}
-.count{font-size:14px;color:#ccc;margin-top:8px}
 .prayer{background:#111;border-radius:12px;overflow:hidden;margin-bottom:12px}
 .row{display:flex;justify-content:space-between;padding:13px 15px;border-bottom:1px solid #222;font-size:18px}
 .row:last-child{border:none}
-.row.active{background:#f5c518;color:#000;font-weight:bold}
 button{width:100%;padding:14px;border:none;border-radius:12px;font-size:18px;font-weight:bold;cursor:pointer;margin-bottom:10px}
 .btn-gold{background:#f5c518;color:#000}
-.btn-green{background:#1a7a3a;color:#fff}
 .btn-dark{background:#222;color:#fff;border:1px solid #444}
-.mp3-box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin-bottom:12px;text-align:right}
-.mp3-box h3{color:#f5c518;font-size:16px;margin-bottom:8px;text-align:center}
-.mp3-box button{font-size:15px;padding:10px;margin-bottom:6px}
+.mp3-box{background:#111;border:1px solid #333;border-radius:12px;padding:12px;margin-bottom:12px}
+.mp3-box h3{color:#f5c518;font-size:16px;margin-bottom:8px}
 .footer{color:#999;font-size:14px;margin-top:10px;line-height:1.8}
 .footer b{color:#f5c518}
-small{color:#999;font-size:13px;line-height:1.7;display:block;margin-top:8px}
 </style>
 </head>
 <body>
-
 <div class="top">
 <h1>🕌 مسجد سيدي عيسى</h1>
 <p>حيّ على الصلاة - سيدي عيسى، المسيلة، الجزائر</p>
 <div class="name">بإشراف: عبدلي فارس</div>
 </div>
-
-<!-- 3 - التاريخ الهجري + الميلادي -->
 <div class="date-box">
-<div>📅 الميلادي: <b id="greg">...</b></div>
-<div>🌙 الهجري: <b id="hijri">...</b></div>
-<div id="nextPrayer" class="count">...</div>
+<div>📅 الميلادي: <b id="greg">الأحد 8 نوفمبر 2026</b></div>
+<div>🌙 الهجري: <b id="hijri">17 جمادى الأولى 1448 هـ</b></div>
 </div>
-
-<!-- 1 - مواقيت الصلاة كاملة -->
-<div class="prayer" id="prayers">
-<div class="row" data-time="05:42"><span>الفجر</span><span>05:42</span></div>
-<div class="row" data-time="07:08"><span>الشروق</span><span>07:08</span></div>
-<div class="row" data-time="12:36"><span>الظهر</span><span>12:36</span></div>
-<div class="row" data-time="15:28"><span>العصر</span><span>15:28</span></div>
-<div class="row" data-time="17:54"><span>المغرب</span><span>17:54</span></div>
-<div class="row" data-time="19:18"><span>العشاء</span><span>19:18</span></div>
+<div class="prayer">
+<div class="row"><span>الفجر</span><span>05:42</span></div>
+<div class="row"><span>الشروق</span><span>07:08</span></div>
+<div class="row"><span>الظهر</span><span>12:36</span></div>
+<div class="row"><span>العصر</span><span>15:28</span></div>
+<div class="row"><span>المغرب</span><span>17:54</span></div>
+<div class="row"><span>العشاء</span><span>19:18</span></div>
 </div>
-
-<!-- 2 - 3 ملفات mp3 -->
 <div class="mp3-box">
 <h3>🔊 ملفات الصوت - 3 MP3</h3>
-<button class="btn-dark" onclick="playMp3('adhan.mp3')">▶️ تشغيل 1 - الأذان العادي - adhan.mp3</button>
-<button class="btn-dark" onclick="playMp3('adhan2.mp3')">▶️ تشغيل 2 - أذان الفجر - adhan2.mp3</button>
-<button class="btn-dark" onclick="playMp3('adhan3.mp3')">▶️ تشغيل 3 - الدعاء - adhan3.mp3</button>
+<button class="btn-dark" onclick="document.getElementById('p1').play()">▶️ 1 - الأذان - adhan.mp3</button>
+<button class="btn-dark" onclick="document.getElementById('p2').play()">▶️ 2 - أذان الفجر - adhan2.mp3</button>
+<button class="btn-dark" onclick="document.getElementById('p3').play()">▶️ 3 - الدعاء - adhan3.mp3</button>
 </div>
-
 <button class="btn-gold" id="adhanBtn">🔊 تفعيل الأذان الأوتوماتيك</button>
-<button class="btn-green" id="installBtn" style="display:none">
+<audio id="p1" src="adhan.mp3" preload="auto"></audio>
+<audio id="p2" src="adhan2.mp3" preload="auto"></audio>
+<audio id="p3" src="adhan3.mp3" preload="auto"></audio>
+<div class="footer">تطبيق <b>مسجد سيدي عيسى</b><br>صُنع بمحبة من طرف <b>عبدلي فارس</b> ❤️</div>
+<script>
+(function(){
+  try{
+    var n = new Date();
+    var days = ["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+    var months = ["جانفي","فيفري","مارس","أفريل","ماي","جوان","جويلية","أوت","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+    document.getElementById('greg').textContent = days[n.getDay()] + " " + n.getDate() + " " + months[n.getMonth()] + " " + n.getFullYear();
+    try{ document.getElementById('hijri').textContent = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}).format(n); }catch(e){}
+  }catch(e){}
+  var adhanOn=false, last="";
+  var times={"05:42":"adhan2","12:36":"adhan","15:28":"adhan","17:54":"adhan","19:18":"adhan"};
+  document.getElementById('adhanBtn').onclick=function(){
+    adhanOn=true;
+    var a=document.getElementById('p1');
+    a.play().then(function(){a.pause();a.currentTime=0;}).catch(function(){});
+    this.textContent="✅ الأذان مفعّل";
+    alert("تم تفعيل الأذان ✅");
+  };
+  setInterval(function(){
+    if(!adhanOn) return;
+    var d=new Date();
+    var cur=d.getHours()+":"+String(d.getMinutes()).padStart(2,"0");
+    var key=d.toDateString()+"-"+cur;
+    if(key===last) return;
+    if(times[cur]){ last=key; if(times[cur]==="adhan2"){document.getElementById('p2').play();}else{document.getElementById('p1').play();} }
+  },10000);
+})();
+</script>
+</body>
+</html>
