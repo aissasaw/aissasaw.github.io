@@ -5,104 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أذان سيدي عيسى</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#0f3d2e;color:white;text-align:center;padding:20px;min-height:100vh}
-h1{font-size:32px;margin:15px 0 5px}
+body{background:#0f3d2e;color:white;text-align:center;padding:20px;font-family:Arial}
+h1{font-size:32px}
 .sub{color:#ffd700;margin-bottom:20px}
-.date-box{background:rgba(255,255,255,.12);padding:12px;border-radius:15px;margin-bottom:15px}
-#clock{font-size:55px;font-weight:bold;direction:ltr}
-#next{margin:15px 0;background:#ffd700;color:#0f3d2e;padding:15px;border-radius:15px;font-weight:bold}
+.box{background:#1a5a44;padding:15px;border-radius:15px;margin-bottom:15px}
+#clock{font-size:55px;font-weight:bold}
+#next{background:#ffd700;color:#000;padding:15px;border-radius:15px;font-weight:bold;margin:15px 0}
 #next span{font-size:28px;display:block}
-.prayer{display:flex;justify-content:space-between;align-items:center;background:white;color:#222;padding:14px 18px;margin:8px 0;border-radius:12px;font-size:19px;font-weight:bold}
-.prayer.active{background:#ffd700;color:#000;transform:scale(1.02)}
-button{background:#ffd700;border:0;padding:14px 25px;border-radius:50px;font-size:18px;font-weight:bold;margin-top:15px;cursor:pointer;width:100%}
-small{display:block;margin-top:15px;opacity:.8}
+.prayer{display:flex;justify-content:space-between;background:white;color:#222;padding:14px;margin:8px 0;border-radius:12px;font-size:20px;font-weight:bold}
+.prayer.active{background:#ffd700}
+button{background:#ffd700;border:0;padding:15px;border-radius:50px;font-size:19px;font-weight:bold;margin-top:12px;width:100%}
 </style>
 </head>
 <body>
 <h1>🕌 أذان سيدي عيسى</h1>
-<div class="sub">تطبيق العائلة - سيدي عيسى - المسيلة</div>
-
-<div class="date-box">
-<div id="clock">--:--:--</div>
-<div id="date">...</div>
-</div>
-
-<div id="next">جاري جلب الأوقات...<span id="countdown"></span></div>
-
+<div class="sub">سيدي عيسى - المسيلة</div>
+<div class="box"><div id="clock">--:--:--</div><div>الأحد 8 نوفمبر 2026 - سيدي عيسى</div></div>
+<div id="next">...</div>
 <div id="list"></div>
-
 <button onclick="playAdhan()">▶ تشغيل الأذان الآن</button>
-<button onclick="enableAuto()">🔔 تفعيل الأذان التلقائي</button>
-
-<small>أوقات سيدي عيسى - الجزائر - بتوقيت الجزائر</small>
-
-<audio id="adhanAudio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-
+<small>الأوقات تقريبية لسيدي عيسى</small>
+<audio id="a" src="https://cdn.aladhan.com/audio/adhan/a1.mp3"></audio>
 <script>
-let times = {};
-let order = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
-let names = {Fajr:'الفجر',Sunrise:'الشروق',Dhuhr:'الظهر',Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'};
-let audio = document.getElementById('adhanAudio');
-let autoEnabled = false;
-
-async function load(){
-  try{
-    let res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Sidi%20Aissa&country=Algeria&method=19');
-    let data = await res.json();
-    times = data.data.timings;
-    document.getElementById('date').innerText = data.data.date.hijri.day + ' ' + data.data.date.hijri.month.ar + ' ' + data.data.date.hijri.year + ' هـ - ' + data.data.date.readable;
-    render();
-  }catch(e){
-    document.getElementById('next').innerText = 'ما قدرناش نجيبو الأوقات، تحقق من الانترنت';
-  }
-}
+var times = {};
+times.Fajr = "05:45";
+times.Sunrise = "07:10";
+times.Dhuhr = "12:45";
+times.Asr = "15:55";
+times.Maghrib = "18:20";
+times.Isha = "19:45";
+var order = ["Fajr","Sunrise","Dhuhr","Asr","Maghrib","Isha"];
+var names = {};
+names.Fajr = "الفجر";
+names.Sunrise = "الشروق";
+names.Dhuhr = "الظهر";
+names.Asr = "العصر";
+names.Maghrib = "المغرب";
+names.Isha = "العشاء";
 function render(){
-  let html='';
-  order.forEach(k=>{
-    let t = times[k].slice(0,5);
-    html += `<div class="prayer" id="p-${k}"><span>${names[k]}</span><span>${t}</span></div>`;
-  });
-  document.getElementById('list').innerHTML = html;
+  var html = "";
+  for(var i=0;i<order.length;i++){
+    var k = order[i];
+    html = html + '<div class="prayer" id="p-'+k+'"><span>'+names[k]+'</span><span>'+times[k]+'</span></div>';
+  }
+  document.getElementById("list").innerHTML = html;
 }
 function playAdhan(){
-  // رابط أذان حقيقي - بدلو إذا حبيت
-  audio.src = 'https://download.quranicaudio.com/quran/mishaari_rashid_alafasy/001.mp3';
-  // هذا مثال، ضع رابط الأذان اللي تحبو
-  // الأفضل: استعمل هذا الرابط للأذان
-  audio.src = 'https://server8.mp3quran.net/afs/001.mp3';
-  audio.play().catch(()=>alert('دير كليك مرة أخرى للتشغيل'));
-  // لتشغيل أذان حقيقي، استبدل الرابط بهذا:
-  // https://www.islamcan.com/audio/adhan/azan1.mp3
-}
-function enableAuto(){
-  autoEnabled = true;
-  alert('تم تفعيل الأذان التلقائي ✅ أبقى الصفحة مفتوحة');
+  var au = document.getElementById("a");
+  au.play();
+  alert("راهو يخدم الأذان 🔊");
 }
 function tick(){
-  let now = new Date();
-  document.getElementById('clock').innerText = now.toLocaleTimeString('ar-DZ');
-  if(!times.Fajr) return;
-  let nextName=null, nextTime=null;
-  for(let k of order){
-    if(k==='Sunrise') continue;
-    let [h,m] = times[k].slice(0,5).split(':');
-    let d = new Date(); d.setHours(h,m,0,0);
-    if(d > now){ nextName=k; nextTime=d; break; }
+  var now = new Date();
+  var h = now.getHours();
+  var m = now.getMinutes();
+  var s = now.getSeconds();
+  if(h<10) h="0"+h;
+  if(m<10) m="0"+m;
+  if(s<10) s="0"+s;
+  document.getElementById("clock").innerText = h+":"+m+":"+s;
+  var nextName = "Fajr";
+  var nextTime = null;
+  for(var i=0;i<order.length;i++){
+    var k = order[i];
+    if(k==="Sunrise") continue;
+    var parts = times[k].split(":");
+    var d = new Date();
+    d.setHours(parseInt(parts[0]), parseInt(parts[1]), 0, 0);
+    if(d > now){ nextName = k; nextTime = d; break; }
   }
-  if(!nextName){
-    let [h,m] = times['Fajr'].slice(0,5).split(':');
-    let d = new Date(); d.setDate(d.getDate()+1); d.setHours(h,m,0,0);
-    nextName='Fajr'; nextTime=d;
+  if(nextTime === null){
+    var p2 = times["Fajr"].split(":");
+    var d2 = new Date();
+    d2.setDate(d2.getDate()+1);
+    d2.setHours(parseInt(p2[0]), parseInt(p2[1]), 0, 0);
+    nextName = "Fajr";
+    nextTime = d2;
   }
-  let diff = nextTime - now;
-  let hh = Math.floor(diff/3600000);
-  let mm = Math.floor(diff%3600000/60000);
-  let ss = Math.floor(diff%60000/1000);
-  document.getElementById('next').innerHTML = `الصلاة القادمة: ${names[nextName]} - ${times[nextName].slice(0,5)}<span>${hh} سا : ${mm} د : ${ss} ثا</span>`;
-  document.getElementById('countdown').innerText = '';
-  order.forEach(k=>{
-    let el = document.getElementById('p-'+k);
-    if(el) el.classList.toggle('active', k===nextName);
-  });
-  // أذان تلقائي
+  var diff = nextTime - now;
+  var hh = Math.floor(diff/3600000);
+  var mm = Math.floor(diff%3600000/60000);
+  var ss = Math.floor(diff%60000/1000);
+  document.getElementById("next").innerHTML = "الصلاة القادمة: " + names[nextName] + " - " + times[nextName] + "<span>" + hh + " سا : " + mm + " د : " + ss + " ثا</span>";
+}
+render();
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
