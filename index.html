@@ -439,77 +439,66 @@ body{font-family:'Cairo',sans-serif;background:#000;color:#fff}
 
 </div> <!-- نهاية قائمة المنتجات -->
 
-<!-- ===== قسم المقالات ===== -->
-<section id="articles" class="py-10 px-4 max-w-4xl mx-auto space-y-6">
-  <h2 class="font-heading font-black text-2xl text-white text-center">المقالات 📝</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <article class="rounded-2xl border border-zinc-900 bg-zinc-950/70 p-5 space-y-3">
-      <h3 class="font-bold text-white">دليل عزل الصوت الاقتصادي</h3>
-      <p class="text-xs text-zinc-400 leading-relaxed">كيفاه تسجل في غرفتك بصوت نقي بلا ما تصرف بزاف؟ نصائح عملية للرابرية المبتدئين.</p>
-      <a href="#" class="inline-block px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold">اقرأ المقال الآن</a>
+<!-- Articles Section -->
+<section id="articles" class="py-16 px-4 max-w-6xl mx-auto">
+  <h2 class="text-3xl font-black text-center mb-2">المقالات</h2>
+  <p class="text-center text-zinc-400 mb-8">اقرا و تعلم</p>
+  <div class="grid md:grid-cols-2 gap-6">
+    <article class="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800">
+      <img loading="lazy" src="article1.jpg" alt="تاريخ الراب في الجزائر" class="w-full h-48 object-cover" />
+      <div class="p-5">
+        <h3 class="font-black text-lg mb-2">تاريخ الراب في الجزائر</h3>
+        <p class="text-sm text-zinc-400 mb-4">كيف بدا الراب في الجزائر و كيف وصل لليوم.</p>
+        <a href="javascript:void(0)" onclick="document.getElementById('article1-full').style.display='block'; this.style.display='none'" class="inline-block px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-sm">اقرأ المقال</a>
+        <div id="article1-full" style="display:none; margin-top:15px; font-size:14px; line-height:1.8; color:#e4e4e7;">
+          <p>الراب في الجزائر بدا في التسعينات، من الحومة و من الشارع. الشباب عبروا على الواقع تاعهم بالكلمات و الموسيقى.</p>
+          <p style="margin-top:10px;">و اليوم الراب الجزائري ولا معروف في كل مكان، و بقى يحكي على الحومة، الكرامة، و الشهيد.</p>
+        </div>
+      </div>
     </article>
-    <article class="rounded-2xl border border-zinc-900 bg-zinc-950/70 p-5 space-y-3">
-      <h3 class="font-bold text-white">تاريخ الراب في الجزائر</h3>
-      <p class="text-xs text-zinc-400 leading-relaxed">من البدايات حتى الدرل، كيفاه تطور الراب الجزائري و واش هي أهم المحطات تاعو؟</p>
-      <a href="#" class="inline-block px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold border border-zinc-800">اقرأ المقال</a>
+    <article class="bg-zinc-900 rounded-3xl overflow-hidden border border-zinc-800">
+      <img loading="lazy" src="article2.jpg" alt="دليل عزل الصوت" class="w-full h-48 object-cover" />
+      <div class="p-5">
+        <h3 class="font-black text-lg mb-2">دليل عزل الصوت الاقتصادي</h3>
+        <p class="text-sm text-zinc-400 mb-4">خطوات عملية و بسيطة لمعالجة صدى الغرفة و عزل الصوت بأقل التكاليف.</p>
+        <a href="acoustic-foam-guide.html" class="inline-block px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-sm">اقرأ المقال</a>
+      </div>
     </article>
   </div>
 </section>
 
-<!-- ===== ركن الشهيد ===== -->
-<section id="martyr" class="py-10 px-4 max-w-4xl mx-auto">
-  <div class="rounded-2xl border border-amber-500/30 bg-gradient-to-b from-zinc-950 to-black p-6 text-center space-y-4">
-    <span class="inline-block px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-[11px] font-bold">🇩🇿 ركن الشهيد</span>
-    <h2 class="font-heading font-black text-2xl text-white">ركن الشهيد</h2>
-    <p class="text-sm text-zinc-400 leading-relaxed">هنا نترحم على شهدائنا الأبرار، اللي ضحاو بحياتهم باش نعيشو حنا اليوم في حرية و كرامة. المجد و الخلود لشهدائنا الأبرار.</p>
-    <div class="rounded-xl bg-zinc-900/70 border border-zinc-800 p-4 text-right">
-      <h3 class="font-bold text-white text-sm">🤲 دعاء للشهيد</h3>
-      <p class="text-xs text-zinc-400 leading-relaxed mt-1">اللهم ارحم شهداءنا، و اجعلهم في جنات النعيم، و احفظ الجزائر و أهلها.</p>
-    </div>
-  </div>
+<!-- Martyr Section -->
+<section id="martyr" class="py-16 px-4 max-w-4xl mx-auto text-center">
+  <h2 class="text-3xl font-black mb-4">ركن الشهيد</h2>
+  <p class="text-zinc-400">دعاء للشهيد، و وفاء للي ضحاو على هذي البلاد.</p>
 </section>
 
-<!-- ===== من نحن + السيرة الذاتية + سياستنا ===== -->
-<section id="about" class="py-8 px-4 max-w-4xl mx-auto space-y-6">
-  <div id="bio" class="rounded-2xl border border-zinc-900 bg-zinc-950/70 p-6 space-y-3">
-    <h2 class="font-bold text-white text-lg">من نحن</h2>
-    <p class="text-xs text-zinc-400 leading-relaxed">aissasaw - مشروع راب درل جزائري، موسيقى، مرش، و إيقاعات أصلية.</p>
-    <h3 class="font-bold text-white text-sm pt-2">السيرة الذاتية</h3>
-    <p class="text-xs text-zinc-400 leading-relaxed">عيسى - aissasaw، رابر و منتج من سطيف، يخدم ستايل درل جزائري يمزج بين الواقع و الإيقاع القوي.</p>
-  </div>
-  <div id="privacy" class="rounded-2xl border border-zinc-900 bg-zinc-950/70 p-6 space-y-3">
-    <h2 class="font-bold text-white text-lg">سياستنا - سياسة الخصوصية</h2>
-    <p class="text-xs text-zinc-400 leading-relaxed">نحترمو خصوصيتك. معلوماتك (الاسم، رقم الهاتف) تستعمل غير باش نكملو الطلب تاعك، و ما نشاركوها مع حتى واحد.</p>
-  </div>
+<!-- About Section -->
+<section id="about" class="py-10 px-4 max-w-4xl mx-auto text-center">
+  <h2 class="text-2xl font-black mb-3">من نحن</h2>
+  <p class="text-zinc-400 text-sm">Aissa Saw - فنان راب جزائري.</p>
 </section>
 
-<!-- ===== الفوتر النهائي ===== -->
-<footer class="mt-6 border-t border-zinc-900 bg-zinc-950/80 py-8 px-4">
-  <div class="max-w-4xl mx-auto text-center space-y-4">
-    <h3 class="font-bold text-white text-lg">aissasaw</h3>
-    <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
-      <a href="#about" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">من نحن</a>
-      <a href="#bio" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">السيرة الذاتية</a>
-      <a href="#privacy" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">سياستنا</a>
-      <a href="#articles" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">المقالات</a>
-      <a href="#martyr" class="px-3 py-2 rounded-lg bg-amber-500/20 text-amber-400">ركن الشهيد</a>
-      <a href="https://wa.me/213674595101" target="_blank" class="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold">اتصل بنا</a>
-    </div>
-    <p class="text-[11px] text-zinc-500">© 2026 aissasaw - جميع الحقوق محفوظة</p>
-  </div>
-                                                                                                                         </footer>
-</div>
-</div>
-    <div style="background: #f9f9f9; padding:20px; border-radius:12px; margin:15px; display:flex; flex-direction:column; align-items:center; text-align:center;">
-        <h3 style="color:#111; font-size:1.1rem; margin-top:0; text-align:center;">دليل عزل الصوت الاقتصادي</h3>
-        <p style="color:#111; font-size:0.9rem; text-align:center;">خطوات عملية وبسيطة لمعالجة صدى الغرفة وعزل الصوت بأقل التكاليف.</p>
-        <a href="acoustic-foam-guide.html" style="background:#e30613; color:#fff; padding:10px 25px; border-radius:8px; text-decoration:none; display:block; margin:10px auto 0 auto; width:fit-content;">اقرأ المقال الآن</a>
-    </div>
-    <amp-auto-ads type="adsense"
-        data-ad-client="ca-pub-484426540">
-    </amp-auto-ads>
-              
-    </div>
+<!-- Bio Section -->
+<section id="bio" class="py-10 px-4 max-w-4xl mx-auto text-center">
+  <h2 class="text-2xl font-black mb-3">السيرة الذاتية</h2>
+  <p class="text-zinc-400 text-sm">السيرة الذاتية تاع Aissa Saw.</p>
+</section>
+
+<!-- Privacy Section -->
+<section id="privacy" class="py-10 px-4 max-w-4xl mx-auto text-center">
+  <h2 class="text-2xl font-black mb-3">سياستنا</h2>
+  <p class="text-zinc-400 text-sm">نحترم الخصوصية تاعك.</p>
+</section>
+
+<!-- Footer Links -->
+<footer class="py-8 text-center">
+  <div class="flex flex-wrap justify-center gap-2 mb-4">
+    <a href="#about" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">من نحن</a>
+    <a href="#bio" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">السيرة الذاتية</a>
+    <a href="#privacy" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">سياستنا</a>
+    <a href="#articles" class="px-3 py-2 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-200">المقالات</a>
+    <a href="#martyr" class="px-3 py-2 rounded-lg bg-amber-500/20 text
               <!-- استوديو الذكاء الاصطناعي -->
 <section id="ai-studio" style="background:#0f0f0f; padding:40px 15px; text-align:center; color:white;">
   <h2 style="color:#c084fc; font-size:28px; margin-bottom:10px;">🎨 استوديو الذكاء الاصطناعي</h2>
