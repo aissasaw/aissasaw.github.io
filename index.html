@@ -438,6 +438,7 @@ body{font-family:'Cairo',sans-serif;background:#000;color:#fff}
 </div>
 
 </div> <!-- نهاية قائمة المنتجات -->
+
 <!-- ===== قائمة البطاقات المضيئة (بديل المقالات وركن الشهيد والفوتر) ===== -->
 <section class="py-8 px-4 max-w-md mx-auto">
   <div class="flex flex-col gap-3.5">
@@ -511,14 +512,43 @@ body{font-family:'Cairo',sans-serif;background:#000;color:#fff}
       <span class="text-purple-400 text-lg font-bold group-hover:-translate-x-1 transition-transform">‹</span>
     </a>
 
-<!-- 5. اتصل بنا (إطار أخضر متوهج) -->
-    <a href="https://wa.me" ... >
-       ...
-    </a>
+    <!-- 5. اتصل بنا (إطار أخضر متوهج - يفتح خيارات التواصل بالداخل) -->
+    <details class="group rounded-2xl bg-zinc-900/90 border border-emerald-500/60 shadow-[0_0_15px_rgba(16,185,129,0.18)] hover:border-emerald-400 transition-all duration-300 overflow-hidden">
+      <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="text-right">
+            <h3 class="font-bold text-white text-sm">اتصل بنا</h3>
+            <p class="text-[11px] text-zinc-400 mt-0.5">واتساب، البريد الإلكتروني ونموذج المراسلة</p>
+          </div>
+        </div>
+        <span class="text-emerald-400 text-lg font-bold transition-transform group-open:-rotate-90">‹</span>
+      </summary>
+
+      <!-- خيارات التواصل المخفية بالداخل -->
+      <div class="px-4 pb-4 pt-2 flex flex-col gap-2 border-t border-zinc-800/80 bg-zinc-950/60">
+        <!-- خيار واتساب -->
+        <a href="https://wa.me/213674595101" target="_blank" class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 text-zinc-200 text-xs font-bold flex items-center justify-between">
+          <span>مراسلة مباشرة عبر واتساب</span>
+          <span class="text-emerald-400">←</span>
+        </a>
+        <!-- خيار البريد الإلكتروني -->
+        <a href="mailto:aissasaw10@gmail.com" class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-cyan-500/50 text-zinc-200 text-xs font-bold flex items-center justify-between">
+          <span>البريد الإلكتروني: aissasaw10@gmail.com</span>
+          <span class="text-cyan-400">←</span>
+        </a>
+        <!-- خيار صفحة اتصل بنا الكاملة (مهمة لـ AdSense) -->
+        <a href="contact.html" class="p-3 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 text-zinc-200 text-xs font-bold flex items-center justify-between">
+          <span>فتح نموذج المراسلة الكامل</span>
+          <span class="text-amber-400">←</span>
+        </a>
+      </div>
+    </details>
 
   </div>
 </section>
-              
 
 <!-- ===== الفوتر البسيط ===== -->
 <footer class="py-6 px-4 text-center">
@@ -530,6 +560,8 @@ body{font-family:'Cairo',sans-serif;background:#000;color:#fff}
 </div>
 </div>
             </div>
+          
+
           
               <!-- استوديو الذكاء الاصطناعي -->
 <section id="ai-studio" style="background:#0f0f0f; padding:40px 15px; text-align:center; color:white;">
